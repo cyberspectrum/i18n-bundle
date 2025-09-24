@@ -6,7 +6,7 @@ namespace CyberSpectrum\I18NBundle\Configuration\Loader;
 
 use CyberSpectrum\I18N\Configuration\Configuration;
 use CyberSpectrum\I18N\Configuration\DefinitionBuilder;
-use CyberSpectrum\I18N\Configuration\LoaderInterface;
+use CyberSpectrum\I18NBundle\Configuration\LoaderInterface;
 use Exception;
 use Generator;
 use InvalidArgumentException;

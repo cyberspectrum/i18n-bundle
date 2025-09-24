@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace CyberSpectrum\I18NBundle\Configuration;
 
-use CyberSpectrum\I18N\Configuration\AbstractConfigurationLoader;
 use CyberSpectrum\I18N\Configuration\Configuration;
 use CyberSpectrum\I18N\Configuration\DefinitionBuilder;
-use CyberSpectrum\I18N\Configuration\LoaderInterface;
 use CyberSpectrum\I18NBundle\Configuration\Loader\YamlLoader;
 use Symfony\Component\Config\FileLocatorInterface;
 

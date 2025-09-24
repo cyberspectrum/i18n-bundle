@@ -6,7 +6,7 @@ namespace CyberSpectrum\I18NBundle\Test\Command;
 
 use Closure;
 use CyberSpectrum\I18NBundle\Command\DebugProvidersCommand;
-use CyberSpectrum\I18N\DependencyInjection\IdProvidingServiceLocator;
+use CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace CyberSpectrum\I18NBundle\Test\Job;
 
-use CyberSpectrum\I18N\Configuration\AbstractConfigurationLoader;
 use CyberSpectrum\I18N\Configuration\Configuration;
+use CyberSpectrum\I18N\Configuration\Definition\Definition;
 use CyberSpectrum\I18N\Job\JobFactory;
 use CyberSpectrum\I18N\Job\JobFactoryFactory;
-use CyberSpectrum\I18N\Configuration\Definition\Definition;
+use CyberSpectrum\I18NBundle\Configuration\AbstractConfigurationLoader;
 use CyberSpectrum\I18NBundle\Job\JobBuilderFactory;
 use PHPUnit\Framework\TestCase;
 

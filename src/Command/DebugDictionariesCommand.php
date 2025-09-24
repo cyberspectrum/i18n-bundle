@@ -6,7 +6,7 @@ namespace CyberSpectrum\I18NBundle\Command;
 
 use CyberSpectrum\I18N\Dictionary\DictionaryInformation;
 use CyberSpectrum\I18N\Dictionary\DictionaryProviderInterface;
-use CyberSpectrum\I18N\DependencyInjection\IdProvidingServiceLocator;
+use CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;

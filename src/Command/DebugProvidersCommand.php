@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CyberSpectrum\I18NBundle\Command;
 
-use CyberSpectrum\I18N\DependencyInjection\IdProvidingServiceLocator;
+use CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
