@@ -32,6 +32,7 @@
   },
   "require-dev": {
     "cyberspectrum/i18n-xliff": "^1.1@dev",
+    "dg/bypass-finals": "^1.9",
     "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {
@@ -48,6 +49,9 @@
     "psr-4": {
       "CyberSpectrum\\I18NBundle\\Test\\": "tests"
     }
+  },
+  "config": {
+    "sort-packages": true
   },
   "extra": {
     "branch-alias": {
