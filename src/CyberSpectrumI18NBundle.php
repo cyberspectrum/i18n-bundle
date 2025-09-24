@@ -16,6 +16,7 @@ final class CyberSpectrumI18NBundle extends Bundle
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
@@ -26,6 +27,7 @@ final class CyberSpectrumI18NBundle extends Bundle
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getContainerExtension(): ExtensionInterface
     {
         if (!$this->extension) {

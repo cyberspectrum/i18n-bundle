@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 final class CyberSpectrumI18NExtension extends Extension
 {
     /** Overrides the name. */
+    #[\Override]
     public function getAlias(): string
     {
         return 'cyberspectrum_i18n';
@@ -28,6 +29,7 @@ final class CyberSpectrumI18NExtension extends Extension
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -58,6 +60,7 @@ final class CyberSpectrumI18NExtension extends Extension
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         return new Configuration();

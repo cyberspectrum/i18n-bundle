@@ -15,6 +15,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @psalm-suppress MixedMethodCall
      */
+    #[\Override]
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('cyberspectrum_i18n');

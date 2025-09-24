@@ -26,6 +26,7 @@ final class CollectDictionaryProvidersPass implements CompilerPassInterface
      *
      * @throws RuntimeException When a tag has no provider name or multiple services have been registered.
      */
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         if ([] === $services = $container->findTaggedServiceIds(self::TAG_DICTIONARY_PROVIDER)) {

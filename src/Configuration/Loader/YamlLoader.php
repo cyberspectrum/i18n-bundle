@@ -41,6 +41,7 @@ final class YamlLoader extends AbstractFileLoader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function load($resource, $type = null): void
     {
         if (!is_string($resource)) {
@@ -64,6 +65,7 @@ final class YamlLoader extends AbstractFileLoader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function supports($resource, $type = null): bool
     {
         if (!is_string($resource)) {

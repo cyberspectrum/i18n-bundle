@@ -33,6 +33,7 @@ final class ConfigurationLoader extends AbstractConfigurationLoader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     protected function getLoader($source, Configuration $configuration): LoaderInterface
     {
         return new YamlLoader($configuration, $this->locator, $this->definitionBuilder);

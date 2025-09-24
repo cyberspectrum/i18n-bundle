@@ -24,6 +24,7 @@ final class DebugProvidersCommand extends Command
         $this->providers = $providers;
     }
 
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -35,6 +36,7 @@ final class DebugProvidersCommand extends Command
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->providers->ids() as $providerName) {

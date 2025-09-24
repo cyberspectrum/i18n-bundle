@@ -39,6 +39,7 @@ final class DebugDictionariesCommand extends Command
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -53,6 +54,7 @@ final class DebugDictionariesCommand extends Command
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string|null $filterProvider */
