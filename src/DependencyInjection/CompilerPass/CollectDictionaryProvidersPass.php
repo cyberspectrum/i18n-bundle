@@ -85,13 +85,13 @@ final class CollectDictionaryProvidersPass implements CompilerPassInterface
      */
     public function getProviderAlias(string $className): string
     {
-        if ('DictionaryProvider' !== substr($className, -18)) {
+        if (!str_ends_with($className, 'DictionaryProvider')) {
             throw new RuntimeException(
                 'DictionaryProvider "' . $className .
                 '" does not follow the naming convention; can not configure automatically.'
             );
         }
-        $classBaseName = substr(strrchr($className, '\\'), 1, -18);
+        $classBaseName = substr((string) strrchr($className, '\\'), 1, -18);
 
         return ContainerBuilder::underscore($classBaseName);
     }

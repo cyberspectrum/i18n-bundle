@@ -150,9 +150,9 @@ final class YamlLoader extends AbstractFileLoader
                 $file,
                 &$prevErrorHandler
             ): bool {
-                $message = E_USER_DEPRECATED === $level
-                    ? preg_replace('/ on line \d+/', ' in "' . $file . '"$0', $message)
-                    : $message;
+                if (E_USER_DEPRECATED === $level) {
+                    $message = (string) preg_replace('/ on line \d+/', ' in "' . $file . '"$0', $message);
+                }
                 if (is_callable($prevErrorHandler)) {
                     return (bool) $prevErrorHandler($level, $message, $script, $line);
                 }
