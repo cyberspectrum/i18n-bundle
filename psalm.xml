@@ -10,4 +10,12 @@
     <projectFiles>
         <directory name="src" />
     </projectFiles>
+    <issueHandlers>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <!-- used as Symfony service -->
+                <referencedMethod name="CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator::__construct"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+    </issueHandlers>
 </psalm>
