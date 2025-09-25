@@ -35,6 +35,8 @@ use function substr;
  *
  * Largely based upon symfony file loader which is written by Fabien Potencier <fabien@symfony.com>.
  *
+ * @api
+ *
  * @psalm-type TContentsArray=array{
  *   dictionaries?: array<string, array{name?: string, dictionary?: string, type: string}>,
  *   jobs?: array<string, array{type: string}>

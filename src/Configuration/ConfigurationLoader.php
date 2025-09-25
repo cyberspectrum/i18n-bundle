@@ -9,7 +9,11 @@ use CyberSpectrum\I18N\Configuration\DefinitionBuilder;
 use CyberSpectrum\I18NBundle\Configuration\Loader\YamlLoader;
 use Symfony\Component\Config\FileLocatorInterface;
 
-/** This loads a config file. */
+/**
+ * This loads a config file.
+ *
+ * @api
+ */
 final class ConfigurationLoader extends AbstractConfigurationLoader
 {
     /** The definition builder. */

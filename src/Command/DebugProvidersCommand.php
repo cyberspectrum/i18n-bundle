@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * This class provides a command to list the providers.
+ *
+ * @api
  */
 final class DebugProvidersCommand extends Command
 {

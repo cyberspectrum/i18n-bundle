@@ -12,9 +12,9 @@ use InvalidArgumentException;
 /**
  * This builds translation jobs.
  *
- * @final
+ * @api
  */
-class JobBuilderFactory
+final class JobBuilderFactory
 {
     /** The dictionary providers. */
     private JobFactoryFactory $jobFactoryFactory;

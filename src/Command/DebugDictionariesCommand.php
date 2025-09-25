@@ -21,6 +21,8 @@ use function assert;
 
 /**
  * This class provides a command to list the dictionaries.
+ *
+ * @api
  */
 final class DebugDictionariesCommand extends Command
 {

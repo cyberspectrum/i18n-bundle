@@ -10,7 +10,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/** This provides the bundle entry point. */
+/**
+ * This provides the bundle entry point.
+ *
+ * @api
+ */
 final class CyberSpectrumI18NBundle extends Bundle
 {
     /**

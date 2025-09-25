@@ -14,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * This class provides a command to process jobs.
+ *
+ * @api
  */
 final class ProcessCommand extends Command
 {
