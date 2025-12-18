@@ -20,7 +20,10 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('cyberspectrum_i18n');
         $rootNode = $treeBuilder->getRootNode();
-        /** @psalm-suppress UndefinedMethod */
+        /**
+         * @psalm-suppress UndefinedMethod
+         * @psalm-suppress UnusedMethodCall
+         */
         $rootNode
             ->children()
                 ->booleanNode('enable_xliff')
