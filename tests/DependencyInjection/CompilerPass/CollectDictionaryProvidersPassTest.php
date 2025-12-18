@@ -1,47 +1,23 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18NBundle\Test\DependencyInjection\CompilerPass;
 
 use CyberSpectrum\I18N\Memory\MemoryDictionaryProvider;
 use CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass;
 use CyberSpectrum\I18N\Dictionary\DictionaryProviderInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * This tests the service collector pass.
- *
- * @covers \CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass
- */
-class CollectDictionaryProvidersPassTest extends TestCase
+#[CoversClass(CollectDictionaryProvidersPass::class)]
+final class CollectDictionaryProvidersPassTest extends TestCase
 {
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testCollectsProviders(): void
     {
         $container = new ContainerBuilder();
@@ -62,19 +38,14 @@ class CollectDictionaryProvidersPassTest extends TestCase
         $registry  = $container->getDefinition('cyberspectrum_i18n.providers');
         $arguments = $registry->getArguments();
 
-        $this->assertCount(1, $arguments);
-        $this->assertSame(['provider1', 'provider2'], array_keys($arguments[0]));
-        $this->assertInstanceOf(Reference::class, $arguments[0]['provider1']);
-        $this->assertSame('service1', (string) $arguments[0]['provider1']);
-        $this->assertInstanceOf(Reference::class, $arguments[0]['provider2']);
-        $this->assertSame('service2', (string) $arguments[0]['provider2']);
+        self::assertCount(1, $arguments);
+        self::assertSame(['provider1', 'provider2'], array_keys($arguments[0]));
+        self::assertInstanceOf(Reference::class, $arguments[0]['provider1']);
+        self::assertSame('service1', (string) $arguments[0]['provider1']);
+        self::assertInstanceOf(Reference::class, $arguments[0]['provider2']);
+        self::assertSame('service2', (string) $arguments[0]['provider2']);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testThrowsForMultipleProvidersWithSameName(): void
     {
         $container = new ContainerBuilder();
@@ -89,23 +60,18 @@ class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Multiple dictionary providers with name "provider-name".');
 
         $servicePass = new CollectDictionaryProvidersPass();
         $servicePass->process($container);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testDoesNothingWhenNoProviderAvailable(): void
     {
         $container = $this
             ->getMockBuilder(ContainerBuilder::class)
-            ->setMethods(['findTaggedServiceIds', 'getDefinition'])
+            ->onlyMethods(['findTaggedServiceIds', 'getDefinition'])
             ->getMock();
 
         $container->expects($this->once())->method('findTaggedServiceIds')->willReturn([]);
@@ -115,11 +81,6 @@ class CollectDictionaryProvidersPassTest extends TestCase
         $servicePass->process($container);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testAutoConfigureProviderName(): void
     {
         $container = new ContainerBuilder();
@@ -143,17 +104,12 @@ class CollectDictionaryProvidersPassTest extends TestCase
         $registry  = $container->getDefinition('cyberspectrum_i18n.providers');
         $arguments = $registry->getArguments();
 
-        $this->assertCount(1, $arguments);
-        $this->assertSame(['memory'], array_keys($arguments[0]));
-        $this->assertInstanceOf(Reference::class, $arguments[0]['memory']);
-        $this->assertSame('service1', (string) $arguments[0]['memory']);
+        self::assertCount(1, $arguments);
+        self::assertSame(['memory'], array_keys($arguments[0]));
+        self::assertInstanceOf(Reference::class, $arguments[0]['memory']);
+        self::assertSame('service1', (string) $arguments[0]['memory']);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testThrowsForProvidersWithoutName(): void
     {
         $container = new ContainerBuilder();
@@ -166,18 +122,15 @@ class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Tag "cyberspectrum_i18n.dictionary_provider" for service "service" has no provider key.');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(
+            'Tag "cyberspectrum_i18n.dictionary_provider" for service "service" has no provider key.'
+        );
 
         $servicePass = new CollectDictionaryProvidersPass();
         $servicePass->process($container);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testThrowsForProvidersNotFollowingNamingConvention(): void
     {
         $container = new ContainerBuilder();
@@ -190,10 +143,11 @@ class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             'DictionaryProvider "' . DictionaryProviderInterface::class .
-            '" does not follow the naming convention; can not configure automatically.');
+            '" does not follow the naming convention; can not configure automatically.'
+        );
 
         $servicePass = new CollectDictionaryProvidersPass();
         $servicePass->process($container);

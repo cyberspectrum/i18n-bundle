@@ -5,7 +5,7 @@ imports:
 services:
   # Translation provider registry - populated during container build.
   cyberspectrum_i18n.providers:
-    class: CyberSpectrum\I18N\DependencyInjection\IdProvidingServiceLocator
+    class: CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator
     arguments:
       - []
     tags: ['container.service_locator']
