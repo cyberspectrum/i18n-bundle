@@ -174,7 +174,7 @@ abstract class AbstractFileLoader implements LoaderInterface
     protected function glob(
         string $pattern,
         bool $recursive,
-        &$resource = null,
+        mixed &$resource = null,
         bool $ignoreErrors = false,
         bool $forExclusion = false,
         array $excluded = []
@@ -277,7 +277,7 @@ abstract class AbstractFileLoader implements LoaderInterface
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function doImport(
-        $resource,
+        mixed $resource,
         string $type = null,
         bool $ignoreErrors = false,
         string $sourceResource = null
