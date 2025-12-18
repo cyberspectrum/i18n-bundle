@@ -10,18 +10,19 @@ use CyberSpectrum\I18N\Job\JobFactory;
 use CyberSpectrum\I18N\Job\JobFactoryFactory;
 use CyberSpectrum\I18NBundle\Configuration\AbstractConfigurationLoader;
 use CyberSpectrum\I18NBundle\Job\JobBuilderFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/** @covers \CyberSpectrum\I18NBundle\Job\JobBuilderFactory */
+#[CoversClass(JobBuilderFactory::class)]
 final class JobBuilderFactoryTest extends TestCase
 {
     public function testCreate(): void
     {
         $configurationFactory = $this
             ->getMockBuilder(AbstractConfigurationLoader::class)
-            ->onlyMethods(['load'])
+            ->onlyMethods(['load', 'getLoader'])
             ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+            ->getMock();
         $configurationFactory
             ->expects($this->once())
             ->method('load')

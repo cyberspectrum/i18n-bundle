@@ -11,14 +11,15 @@ use CyberSpectrum\I18N\Configuration\DefinitionBuilder\CopyJobDefinitionBuilder;
 use CyberSpectrum\I18N\Configuration\DefinitionBuilder\MemoryDictionaryDefinitionBuilder;
 use CyberSpectrum\I18N\Xliff\XliffDictionaryDefinitionBuilder;
 use CyberSpectrum\I18NBundle\Configuration\ConfigurationLoader;
+use CyberSpectrum\I18NBundle\Configuration\Loader\YamlLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * @covers \CyberSpectrum\I18NBundle\Configuration\ConfigurationLoader
- * @covers \CyberSpectrum\I18NBundle\Configuration\Loader\YamlLoader
- */
+#[CoversClass(ConfigurationLoader::class)]
+#[CoversClass(YamlLoader::class)]
 final class ConfigurationLoaderTest extends TestCase
 {
     /**
@@ -26,7 +27,7 @@ final class ConfigurationLoaderTest extends TestCase
      *
      * @return array
      */
-    public function configProvider(): array
+    public static function configProvider(): array
     {
         return [
             'simple'           => [
@@ -55,11 +56,7 @@ final class ConfigurationLoaderTest extends TestCase
         ];
     }
 
-    /**
-     * Test loading.
-     *
-     * @dataProvider configProvider
-     */
+    #[DataProvider('configProvider')]
     public function testLoad(array $expected, string $fixture): void
     {
         $definitionBuilder = new DefinitionBuilder(

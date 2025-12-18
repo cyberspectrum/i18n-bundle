@@ -8,11 +8,12 @@ use CyberSpectrum\I18N\Job\TranslationJobInterface;
 use CyberSpectrum\I18NBundle\Command\ProcessCommand;
 use CyberSpectrum\I18N\Job\JobFactory;
 use CyberSpectrum\I18NBundle\Job\JobBuilderFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-/** @covers \CyberSpectrum\I18NBundle\Command\ProcessCommand */
+#[CoversClass(ProcessCommand::class)]
 final class ProcessCommandTest extends TestCase
 {
     public function testConfigure(): void
@@ -33,7 +34,7 @@ final class ProcessCommandTest extends TestCase
 
     public function testRunDefault(): void
     {
-        $job = $this->getMockBuilder(TranslationJobInterface::class)->getMockForAbstractClass();
+        $job = $this->getMockBuilder(TranslationJobInterface::class)->getMock();
         $job->expects($this->once())->method('run')->with(false);
 
         $jobBuilder = $this
@@ -63,7 +64,7 @@ final class ProcessCommandTest extends TestCase
 
     public function testRunSingleJob(): void
     {
-        $job = $this->getMockBuilder(TranslationJobInterface::class)->getMockForAbstractClass();
+        $job = $this->getMockBuilder(TranslationJobInterface::class)->getMock();
         $job->expects($this->once())->method('run')->with(false);
 
         $jobBuilder = $this

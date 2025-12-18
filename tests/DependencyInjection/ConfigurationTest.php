@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace CyberSpectrum\I18NBundle\Test\DependencyInjection;
 
 use CyberSpectrum\I18NBundle\DependencyInjection\Configuration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 
-/** @covers \CyberSpectrum\I18NBundle\DependencyInjection\Configuration */
+#[CoversClass(Configuration::class)]
 final class ConfigurationTest extends TestCase
 {
     public function testDefaults(): void

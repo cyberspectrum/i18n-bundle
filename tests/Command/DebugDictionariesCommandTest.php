@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace CyberSpectrum\I18NBundle\Test\Command;
 
 use ArrayIterator;
-use Closure;
 use CyberSpectrum\I18N\Dictionary\DictionaryInformation;
 use CyberSpectrum\I18N\Dictionary\DictionaryProviderInterface;
 use CyberSpectrum\I18NBundle\Command\DebugDictionariesCommand;
 use CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-/** @covers \CyberSpectrum\I18NBundle\Command\DebugDictionariesCommand */
+#[CoversClass(DebugDictionariesCommand::class)]
+
 final class DebugDictionariesCommandTest extends TestCase
 {
     public function testConfigure(): void
@@ -33,29 +34,23 @@ final class DebugDictionariesCommandTest extends TestCase
 
     public function testDefaultExecution(): void
     {
-        $provider1 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider1 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider1->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
             new DictionaryInformation('foo11', 'en', 'de'),
             new DictionaryInformation('foo12', 'en', 'de'),
         ]));
-        $provider2 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider2 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider2->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
         ]));
-        $provider3 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider3 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider3->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
             new DictionaryInformation('foo31', 'en', 'de'),
         ]));
 
         $providers = new IdProvidingServiceLocator([
-            'provider1' => Closure::fromCallable(function () use ($provider1) {
-                return $provider1;
-            }),
-            'provider2' => Closure::fromCallable(function () use ($provider2) {
-                return $provider2;
-            }),
-            'provider3' => Closure::fromCallable(function () use ($provider3) {
-                return $provider3;
-            }),
+            'provider1' => fn () => $provider1,
+            'provider2' => fn () => $provider2,
+            'provider3' => fn () => $provider3,
         ]);
 
         $command = new DebugDictionariesCommand($providers);
@@ -79,26 +74,20 @@ EOF;
 
     public function testWithProviderFilter(): void
     {
-        $provider1 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider1 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider1->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
             new DictionaryInformation('foo11', 'en', 'de'),
             new DictionaryInformation('foo12', 'en', 'de'),
         ]));
-        $provider2 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider2 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider2->expects($this->never())->method('getAvailableDictionaries');
-        $provider3 = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider3 = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider3->expects($this->never())->method('getAvailableDictionaries');
 
         $providers = new IdProvidingServiceLocator([
-            'provider1' => Closure::fromCallable(function () use ($provider1) {
-                return $provider1;
-            }),
-            'provider2' => Closure::fromCallable(function () use ($provider2) {
-                return $provider2;
-            }),
-            'provider3' => Closure::fromCallable(function () use ($provider3) {
-                return $provider3;
-            }),
+            'provider1' => fn () => $provider1,
+            'provider2' => fn () => $provider2,
+            'provider3' => fn () => $provider3,
         ]);
 
         $command = new DebugDictionariesCommand($providers);
@@ -118,16 +107,14 @@ EOF;
 
     public function testWithSourceLanguageFilter(): void
     {
-        $provider = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
             new DictionaryInformation('foo11', 'en', 'de'),
             new DictionaryInformation('foo12', 'de', 'fr'),
         ]));
 
         $providers = new IdProvidingServiceLocator([
-            'provider1' => Closure::fromCallable(function () use ($provider) {
-                return $provider;
-            }),
+            'provider1' => fn () => $provider,
         ]);
 
         $command = new DebugDictionariesCommand($providers);
@@ -146,16 +133,14 @@ EOF;
 
     public function testWithTargetLanguageFilter(): void
     {
-        $provider = $this->getMockForAbstractClass(DictionaryProviderInterface::class);
+        $provider = $this->getMockBuilder(DictionaryProviderInterface::class)->getMock();
         $provider->expects($this->once())->method('getAvailableDictionaries')->willReturn(new ArrayIterator([
             new DictionaryInformation('foo11', 'en', 'de'),
             new DictionaryInformation('foo12', 'de', 'fr'),
         ]));
 
         $providers = new IdProvidingServiceLocator([
-            'provider1' => Closure::fromCallable(function () use ($provider) {
-                return $provider;
-            }),
+            'provider1' => fn () => $provider,
         ]);
 
         $command = new DebugDictionariesCommand($providers);

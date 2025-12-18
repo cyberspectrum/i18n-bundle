@@ -7,6 +7,7 @@ namespace CyberSpectrum\I18NBundle\Test\DependencyInjection;
 use CyberSpectrum\I18N\Dictionary\DictionaryProviderInterface;
 use CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass;
 use CyberSpectrum\I18NBundle\DependencyInjection\CyberSpectrumI18NExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Config\FileLocator;
@@ -14,7 +15,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-/** @covers \CyberSpectrum\I18NBundle\DependencyInjection\CyberSpectrumI18NExtension */
+#[CoversClass(CyberSpectrumI18NExtension::class)]
 final class CyberSpectrumI18NExtensionTest extends TestCase
 {
     /** Test that the alias is the overridden alias. */
@@ -115,7 +116,7 @@ final class CyberSpectrumI18NExtensionTest extends TestCase
      *
      * @return void
      */
-    protected function assertLoadedConfigs(array $expected, ContainerBuilder $container): void
+    protected static function assertLoadedConfigs(array $expected, ContainerBuilder $container): void
     {
         $resources = $container->getResources();
         $files     = [];

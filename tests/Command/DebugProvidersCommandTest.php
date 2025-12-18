@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace CyberSpectrum\I18NBundle\Test\Command;
 
-use Closure;
 use CyberSpectrum\I18NBundle\Command\DebugProvidersCommand;
 use CyberSpectrum\I18NBundle\DependencyInjection\IdProvidingServiceLocator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-/** @covers \CyberSpectrum\I18NBundle\Command\DebugProvidersCommand */
+#[CoversClass(DebugProvidersCommand::class)]
+
 final class DebugProvidersCommandTest extends TestCase
 {
     public function testConfigure(): void
@@ -27,12 +28,9 @@ final class DebugProvidersCommandTest extends TestCase
     public function testDefaultExecution(): void
     {
         $providers = new IdProvidingServiceLocator([
-            'provider1' => Closure::fromCallable(function () {
-            }),
-            'provider2' => Closure::fromCallable(function () {
-            }),
-            'provider3' => Closure::fromCallable(function () {
-            }),
+            'provider1' => fn () => null,
+            'provider2' => fn () => null,
+            'provider3' => fn () => null,
         ]);
 
         $command = new DebugProvidersCommand($providers);

@@ -7,10 +7,11 @@ namespace CyberSpectrum\I18NBundle\Test;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
 use CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass;
 use CyberSpectrum\I18NBundle\DependencyInjection\CyberSpectrumI18NExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/** @covers \CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle */
+#[CoversClass(CyberSpectrumI18NBundle::class)]
 final class CyberSpectrumI18NBundleTest extends TestCase
 {
     /** Test that the compiler pass is added. */

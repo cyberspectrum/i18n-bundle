@@ -7,13 +7,15 @@ namespace CyberSpectrum\I18NBundle\Test\DependencyInjection\CompilerPass;
 use CyberSpectrum\I18N\Memory\MemoryDictionaryProvider;
 use CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass;
 use CyberSpectrum\I18N\Dictionary\DictionaryProviderInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/** @covers \CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass */
+#[CoversClass(CollectDictionaryProvidersPass::class)]
 final class CollectDictionaryProvidersPassTest extends TestCase
 {
     public function testCollectsProviders(): void
@@ -58,7 +60,7 @@ final class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Multiple dictionary providers with name "provider-name".');
 
         $servicePass = new CollectDictionaryProvidersPass();
@@ -69,7 +71,7 @@ final class CollectDictionaryProvidersPassTest extends TestCase
     {
         $container = $this
             ->getMockBuilder(ContainerBuilder::class)
-            ->setMethods(['findTaggedServiceIds', 'getDefinition'])
+            ->onlyMethods(['findTaggedServiceIds', 'getDefinition'])
             ->getMock();
 
         $container->expects($this->once())->method('findTaggedServiceIds')->willReturn([]);
@@ -120,7 +122,7 @@ final class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             'Tag "cyberspectrum_i18n.dictionary_provider" for service "service" has no provider key.'
         );
@@ -141,7 +143,7 @@ final class CollectDictionaryProvidersPassTest extends TestCase
         );
         unset($registry, $tagged);
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             'DictionaryProvider "' . DictionaryProviderInterface::class .
             '" does not follow the naming convention; can not configure automatically.'

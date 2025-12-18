@@ -6,12 +6,14 @@ namespace CyberSpectrum\I18NBundle\Test\Configuration\Loader;
 
 use CyberSpectrum\I18N\Configuration\Configuration;
 use CyberSpectrum\I18N\Configuration\DefinitionBuilder;
+use CyberSpectrum\I18NBundle\Configuration\Loader\AbstractFileLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-/** @covers \CyberSpectrum\I18NBundle\Configuration\Loader\AbstractFileLoader */
+#[CoversClass(AbstractFileLoader::class)]
 final class AbstractFileLoaderTest extends TestCase
 {
     public function testLoading(): void
@@ -37,7 +39,7 @@ final class AbstractFileLoaderTest extends TestCase
         $config = new Configuration();
         $loader = new DummyLoader(
             $config,
-            $this->getMockForAbstractClass(FileLocatorInterface::class),
+            $this->getMockBuilder(FileLocatorInterface::class)->getMock(),
             $definitionBuilder
         );
 
@@ -74,7 +76,7 @@ final class AbstractFileLoaderTest extends TestCase
         $config = new Configuration();
         $loader = new DummyLoader(
             $config,
-            $this->getMockForAbstractClass(FileLocatorInterface::class),
+            $this->getMockBuilder(FileLocatorInterface::class)->getMock(),
             $definitionBuilder
         );
 
@@ -106,7 +108,7 @@ final class AbstractFileLoaderTest extends TestCase
         $config = new Configuration();
         $loader = new DummyLoader(
             $config,
-            $this->getMockForAbstractClass(FileLocatorInterface::class),
+            $this->getMockBuilder(FileLocatorInterface::class)->getMock(),
             $definitionBuilder
         );
 
